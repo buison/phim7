@@ -1,0 +1,11 @@
+this.vtip=function(){this.xOffset=-10;this.yOffset=10;$(".vtip").unbind().hover(
+function(a){this.t=this.title;this.title="";this.top=a.pageY+yOffset;this.left=a.pageX+xOffset;$("body").append('<p id="vtip">'+this.t+"</p>");$("p#vtip").css("top",this.top+"px").css("left",this.left+"px").fadeIn("slow")},function(){this.title=this.t;$("p#vtip").fadeOut("slow").remove()}).mousemove(function(a){this.top=a.pageY+yOffset;this.left=a.pageX+xOffset;$("p#vtip").css("top",this.top+"px").css("left",this.left+
+"px")})};jQuery(document).ready(function(a){vtip()});numposts=40;
+
+function rutgon(a,b){if(-1!=a.indexOf("<")){for(var c=a.split("<"),d=0;d<c.length;d++)-1!=c[d].indexOf(">")&&(c[d]=c[d].substring(c[d].indexOf(">")+1,c[d].length));a=c.join("")}for(b=b<a.length-1?b:a.length-2;" "!=a.charAt(b-1)&&-1!=a.indexOf(" ",b);)b++;a=a.substring(0,b-1);return a+"..."}
+function altit(a){return-1!=a.indexOf("[")?a.split("[")[1].split("|")[0].replace(/\]/gi,""):"Full"}
+function titvn(a){return-1!=a.indexOf(a)?a.split("-")[0].replace(/(\[.*?\])/gi,""):a}
+function titen(a){return-1!=a.indexOf("-")?a.split("-")[1].replace(/(\[.*?\])/gi,""):titvn(a)}
+function dt(a){return a.replace(/(\[.*?\])/gi,"")}
+
+function slide(k){img=[];maxpost=numposts<=k.feed.entry.length?numposts:k.feed.entry.length;for(var g=0;g<maxpost;g++){var e=k.feed.entry[g],l=e.title.$t,m;if(g==k.feed.entry.length)break;for(var f=0;f<e.link.length;f++)if("alternate"==e.link[f].rel){m=e.link[f].href;break}var n="content"in e?e.content.$t:"summary"in e?e.summary.$t:"";s=n;a=s.indexOf("<img");b=s.indexOf('src="',a);c=s.indexOf('"',b+5);d=s.substr(b+5,c-b-5);-1!=a&&-1!=b&&-1!=c&&""!=d&&(img[g]=d);tennhan=[];if(cate=e.category)for(f=0;f<e.category.length;f++)tennhan[f]=""+e.category[f].term+"";else tennhan="No label";0<=g&&16>=g&&(e='<li class="serial"><h2><a href="'+m+'" title="'+l+'"><span class="poster"><img src="https://cdn.rawgit.com/buison/phim7/master/blank_2-3.gif" alt=""><img class="lazy" src="'+img[g]+'" alt="'+k+'" style="display: block;"><span class="meta"><span class="m-label lang">'+altit(l)+'</span></span><span class="meta br"></span></span><span class="title display">'+titvn(l)+'</span><span class="title real">'+titen(l)+'</span></a></h2><div class="clear"></div></li>',document.write(e))}document.write("")};
